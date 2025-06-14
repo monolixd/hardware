@@ -11,57 +11,69 @@ const hardwareInfo = {
     "Cables": {
         name: "สายเคเบิล",
         image: "images/cables.jpg",
-        description: "สายสัญญาณสำหรับเชื่อมต่ออุปกรณ์คอมพิวเตอร์"
+        description: `สายสัญญาณที่ใช้เชื่อมต่ออุปกรณ์คอมพิวเตอร์ต่าง ๆ เช่น สาย USB, HDMI, LAN เป็นต้น
+มีหน้าที่ในการส่งข้อมูลหรือพลังงานระหว่างอุปกรณ์เพื่อให้การทำงานราบรื่นและต่อเนื่อง`
     },
     "Case": {
         name: "เคสคอมพิวเตอร์",
         image: "images/case.jpg",
-        description: "ตู้สำหรับใส่อุปกรณ์คอมพิวเตอร์"
+        description: `โครงสร้างหรือตู้สำหรับบรรจุชิ้นส่วนของคอมพิวเตอร์ เช่น เมนบอร์ด, PSU, การ์ดจอ
+ช่วยปกป้องอุปกรณ์ภายในจากฝุ่น ความชื้น และช่วยจัดระเบียบภายในเครื่องให้เรียบร้อย`
     },
-    "CPU": {
+    "Cpu": {
         name: "หน่วยประมวลผลกลาง",
-        image: "images/cpu.jpg",
-        description: "สมองของคอมพิวเตอร์ ทำหน้าที่ประมวลผลข้อมูล"
+        image: "images/Cpu.jpg",
+        description: `เป็นสมองหลักของคอมพิวเตอร์ ทำหน้าที่ประมวลผลคำสั่งและข้อมูลจากโปรแกรมต่าง ๆ
+ประสิทธิภาพของ CPU ส่งผลโดยตรงต่อความเร็วในการทำงานของเครื่อง`
     },
-    "GPU": {
+    "Gpu": {
         name: "การ์ดแสดงผล",
         image: "images/gpu.jpg",
-        description: "อุปกรณ์ประมวลผลด้านกราฟิก"
+        description: `อุปกรณ์ประมวลผลกราฟิก ทำหน้าที่แสดงภาพและวิดีโอบนหน้าจออย่างคมชัด
+จำเป็นสำหรับงานด้านเกมมิ่ง ตัดต่อวิดีโอ และงานกราฟิกระดับสูง`
     },
-    "HDD": {
+    "Hdd": {
         name: "ฮาร์ดดิสก์",
         image: "images/hdd.jpg",
-        description: "อุปกรณ์เก็บข้อมูลถาวร"
+        description: `อุปกรณ์จัดเก็บข้อมูลถาวร ใช้บันทึกไฟล์ ระบบปฏิบัติการ และโปรแกรมต่าง ๆ
+แม้จะช้ากว่า SSD แต่ก็มีราคาย่อมเยาและความจุสูง`
     },
     "Headset": {
         name: "หูฟัง",
         image: "images/headset.jpg",
-        description: "อุปกรณ์สำหรับฟังเสียงและพูดคุย"
+        description: `อุปกรณ์ที่รวมลำโพงและไมโครโฟนไว้ด้วยกัน ใช้สำหรับฟังเสียงและสนทนาออนไลน์
+เหมาะสำหรับการเล่นเกม ประชุมทางไกล และฟังเพลง
+`
     },
     "Keyboard": {
         name: "แป้นพิมพ์",
         image: "images/keyboard.jpg",
-        description: "อุปกรณ์สำหรับป้อนข้อมูลตัวอักษร"
+        description: `อุปกรณ์อินพุตที่ใช้พิมพ์ตัวอักษร คำสั่ง และควบคุมคอมพิวเตอร์
+มีหลากหลายรูปแบบ เช่น Mechanical, Membrane รองรับการใช้งานที่แตกต่างกัน`
     },
     "Monitor": {
         name: "จอภาพ",
         image: "images/monitor.jpg",
-        description: "อุปกรณ์แสดงผลภาพ"
+        description: `อุปกรณ์สำหรับแสดงผลลัพธ์จากคอมพิวเตอร์ เช่น ข้อความ รูปภาพ วิดีโอ
+คุณภาพของจอภาพมีผลต่อประสบการณ์ใช้งานและความละเอียดของภาพ`
     },
     "Motherboard": {
         name: "เมนบอร์ด",
         image: "images/motherboard.jpg",
-        description: "แผงวงจรหลักที่เชื่อมต่ออุปกรณ์ทั้งหมด"
+        description: `แผงวงจรหลักที่เชื่อมต่ออุปกรณ์ทุกชิ้นเข้าด้วยกัน เช่น CPU, RAM, GPU
+เป็นศูนย์กลางการสื่อสารของอุปกรณ์ภายในเครื่องคอมพิวเตอร์ทั้งหมด`
     },
     "Mouse": {
         name: "เมาส์",
         image: "images/mouse.jpg",
-        description: "อุปกรณ์ชี้ตำแหน่งและควบคุม"
+        description: `อุปกรณ์ชี้ตำแหน่ง ใช้ควบคุมเคอร์เซอร์บนหน้าจอและคลิกคำสั่งต่าง ๆ
+มีทั้งแบบมีสายและไร้สาย รวมถึงแบบเฉพาะทางสำหรับเกมหรือการออกแบบ`
     },
-    "RAM": {
+    "Ram": {
         name: "หน่วยความจำ",
-        image: "images/ram.jpg",
-        description: "หน่วยความจำชั่วคราวสำหรับการทำงาน"
+        image: "images/Ram.jpg",
+        description: `หน่วยความจำชั่วคราวที่คอมพิวเตอร์ใช้เก็บข้อมูลระหว่างการทำงานของโปรแกรม
+มีผลโดยตรงต่อความเร็วและความสามารถในการทำงานหลายอย่างพร้อมกัน`
     }
 };
 
@@ -132,33 +144,33 @@ async function predict() {
 
         const prediction = await model.predict(webcam.canvas);
         let bestPrediction = prediction[0];
+        let detectionThreshold = 0.7; // 70% threshold
 
-        // หาผลการทำนายที่ดีที่สุด
-        for (let i = 0; i < maxPredictions; i++) {
-            if (prediction[i].probability > bestPrediction.probability) {
-                bestPrediction = prediction[i];
-            }
-        }
+        // Reset predictions
+        prediction.sort((a, b) => b.probability - a.probability);
+        bestPrediction = prediction[0];
 
         // อัพเดทการแสดงผลหลัก
         const mainAccuracy = document.getElementById('main-accuracy');
         const mainLabel = document.getElementById('main-label');
         const accuracy = (bestPrediction.probability * 100).toFixed(1);
         
-        // ใช้ชื่อภาษาไทยจาก hardwareInfo
-        const hardwareData = hardwareInfo[bestPrediction.className];
-        if (hardwareData) {
-            mainLabel.textContent = hardwareData.name;
-            
-            // แสดง sample card ถ้าความแม่นยำมากกว่า 70%
-            if (bestPrediction.probability > 0.7) {
+        // ตรวจสอบว่าควรแสดงผลหรือไม่
+        if (bestPrediction.probability >= detectionThreshold) {
+            const hardwareData = hardwareInfo[bestPrediction.className];
+            if (hardwareData) {
+                mainLabel.textContent = hardwareData.name;
                 showSampleCard(bestPrediction.className);
+            } else {
+                mainLabel.textContent = bestPrediction.className;
             }
+            mainAccuracy.textContent = `${accuracy}%`;
         } else {
-            mainLabel.textContent = bestPrediction.className;
+            mainLabel.textContent = "กำลังตรวจจับ...";
+            mainAccuracy.textContent = "0%";
+            // Hide sample card if confidence is low
+            document.getElementById("sample-card").style.display = "none";
         }
-        
-        mainAccuracy.textContent = `${accuracy}%`;
 
         // แสดงผลทั้งหมด
         labelContainer.innerHTML = '';
@@ -187,15 +199,29 @@ function showSampleCard(className) {
     const hardware = hardwareInfo[className];
     if (!hardware) return;
 
+    // Show the sample card and panel
     const sampleCard = document.getElementById("sample-card");
+    const samplePanel = document.getElementById("sample-panel");
     const sampleImage = document.getElementById("sample-image");
-    const detectedItem = document.getElementById("detected-item");
-    const itemDescription = document.getElementById("item-description");
+    const sampleName = document.getElementById("sample-name");
+    const sampleDescription = document.getElementById("sample-description");
+    const detectedLabel = document.getElementById("detected-label");
+    const deviceType = document.getElementById("device-type");
+    const deviceCategory = document.getElementById("device-category");
 
+    // Update the content
     sampleImage.src = hardware.image;
-    detectedItem.textContent = hardware.name;
-    itemDescription.textContent = hardware.description;
+    sampleName.textContent = hardware.name;
+    sampleDescription.textContent = hardware.description;
+    detectedLabel.textContent = hardware.name;
+    
+    // You can add these properties to your hardwareInfo object
+    deviceType.textContent = hardware.type || "อุปกรณ์คอมพิวเตอร์"; // Default value if type is not defined
+    deviceCategory.textContent = hardware.category || "ฮาร์ดแวร์"; // Default value if category is not defined
+
+    // Show the elements
     sampleCard.style.display = "block";
+    samplePanel.style.display = "block";
 }
 
 function updateStatus(message, state) {

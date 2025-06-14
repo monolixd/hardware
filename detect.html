@@ -97,10 +97,38 @@
                     <i class="fas fa-image"></i>
                     <h2>ตัวอย่างอุปกรณ์ที่ตรวจพบ</h2>
                 </div>
-                <div class="sample-content">
-                    <img id="sample-image" src="" alt="ตัวอย่างอุปกรณ์">
-                    <h3 id="detected-item" class="sample-title"></h3>
-                    <p id="item-description" class="sample-description"></p>
+                <div class="detection-card info-card" id="sample-panel" style="display: none;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <i class="fas fa-info-circle"></i>
+                            <span>ข้อมูลอุปกรณ์</span>
+                        </div>
+                        <div class="device-badge" id="detected-label">-</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="device-showcase">
+                            <div class="device-image-container">
+                                <img id="sample-image" src="" alt="ตัวอย่างอุปกรณ์">
+                                <div class="image-overlay">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                            </div>
+                            <div class="device-details">
+                                <h3 id="sample-name">-</h3>
+                                <p id="sample-description">รายละเอียดอุปกรณ์จะแสดงที่นี่</p>
+                                <div class="device-specs">
+                                    <div class="spec-item">
+                                        <i class="fas fa-tag"></i>
+                                        <span>ประเภท: <span id="device-type">-</span></span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-cogs"></i>
+                                        <span>หมวดหมู่: <span id="device-category">-</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
