@@ -51,7 +51,7 @@
     <!-- Main Container -->
     <div class="main-container">
         <!-- Hero Section -->
-        <section class="hero-section" id="hero-section">
+        <sectio class="hero-section" id="hero-section">
             <div class="hero-content">
                 <div class="hero-badge">
                     <i class="fas fa-sparkles"></i>
@@ -85,7 +85,7 @@
                     <div class="button-background"></div>
                     <div class="button-content">
                         <i class="fas fa-camera"></i>
-                        <span>เริ่มการตรวจจับ</span>
+                        <a href="detect.html">เริ่มการตรวจจับ</a>
                         <i class="fas fa-arrow-right"></i>
                     </div>
                 </button>
@@ -101,141 +101,12 @@
                 </div>
             </div>
         </section>
-
-        <!-- Detection Interface -->
-        <section class="detection-interface" id="detection-section" style="display: none;">
-            <div class="interface-header">
-                <h2 class="interface-title">
-                    <i class="fas fa-eye"></i>
-                    <span>AI Vision Dashboard</span>
-                </h2>
-                <div class="interface-controls">
-                    <button class="control-btn" onclick="toggleCamera()">
-                        <i class="fas fa-pause" id="camera-toggle-icon"></i>
-                    </button>
-                    <button class="control-btn" onclick="resetDetection()">
-                        <i class="fas fa-refresh"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="detection-grid">
-                <!-- Camera Feed -->
-                <div class="detection-card camera-card">
-                    <div class="card-header">
-                        <div class="header-left">
-                            <i class="fas fa-video"></i>
-                            <span>กล้องสด</span>
-                        </div>
-                        <div class="live-indicator">
-                            <div class="live-dot"></div>
-                            <span>LIVE</span>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <div class="camera-container" id="webcam-container">
-                            <div class="camera-loading">
-                                <div class="loading-animation">
-                                    <div class="loading-circle"></div>
-                                    <div class="loading-circle"></div>
-                                    <div class="loading-circle"></div>
-                                </div>
-                                <p>กำลังเปิดกล้อง...</p>
-                            </div>
-                        </div>
-                        <div class="camera-overlay">
-                            <div class="scan-line"></div>
-                            <div class="corner-frame top-left"></div>
-                            <div class="corner-frame top-right"></div>
-                            <div class="corner-frame bottom-left"></div>
-                            <div class="corner-frame bottom-right"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Detection Results -->
-                <div class="detection-card results-card">
-                    <div class="card-header">
-                        <div class="header-left">
-                            <i class="fas fa-brain"></i>
-                            <span>ผลการวิเคราะห์</span>
-                        </div>
-                        <div class="confidence-display" id="confidence-badge">
-                            <span class="confidence-value">0</span>
-                            <span class="confidence-unit">%</span>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <div class="primary-detection" id="top-prediction">
-                            <div class="detection-placeholder">
-                                <i class="fas fa-search"></i>
-                                <span>รอการตรวจจับ...</span>
-                            </div>
-                        </div>
-                        <div class="detection-list" id="label-container">
-                            <!-- Predictions will be populated here -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Device Information -->
-                <div class="detection-card info-card" id="sample-panel" style="display: none;">
-                    <div class="card-header">
-                        <div class="header-left">
-                            <i class="fas fa-info-circle"></i>
-                            <span>ข้อมูลอุปกรณ์</span>
-                        </div>
-                        <div class="device-badge" id="detected-label">-</div>
-                    </div>
-                    <div class="card-content">
-                        <div class="device-showcase">
-                            <div class="device-image-container">
-                                <img id="sample-image" src="" alt="ตัวอย่างอุปกรณ์">
-                                <div class="image-overlay">
-                                    <i class="fas fa-eye"></i>
-                                </div>
-                            </div>
-                            <div class="device-details">
-                                <h3 id="sample-name">-</h3>
-                                <p id="sample-description">รายละเอียดอุปกรณ์จะแสดงที่นี่</p>
-                                <div class="device-specs">
-                                    <div class="spec-item">
-                                        <i class="fas fa-tag"></i>
-                                        <span>ประเภท: <span id="device-type">-</span></span>
-                                    </div>
-                                    <div class="spec-item">
-                                        <i class="fas fa-cogs"></i>
-                                        <span>หมวดหมู่: <span id="device-category">-</span></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Hardware Info Section -->
-        <section class="hardware-info-section" id="hardware-info-section" style="display: none;">
-            <div class="info-header">
-                <h2>🖥️ ความรู้เกี่ยวกับ Hardware คอมพิวเตอร์</h2>
-                <p class="subtitle">เรียนรู้เกี่ยวกับอุปกรณ์คอมพิวเตอร์พื้นฐาน</p>
-            </div>
-            <div class="search-box">
-                <input type="text" id="search" placeholder="ค้นหาอุปกรณ์...">
-                <button class="search-btn">🔍</button>
-            </div>
-            <div class="info-content" id="info-content">
-                <!-- ข้อมูลฮาร์ดแวร์จะแสดงที่นี่ -->
-            </div>
-        </section>
     </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.20.0/dist/tf.min.js"></script>
     <script
         src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.4/dist/teachablemachine-image.min.js"></script>
-    <script src="script.js"></script>
 </body>
 
 </html>

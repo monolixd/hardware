@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hardware Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <!-- Background Elements -->
+    <div class="bg-elements">
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
+        <div class="floating-elements">
+            <div class="floating-circle circle-1"></div>
+            <div class="floating-circle circle-2"></div>
+            <div class="floating-circle circle-3"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" class="nav-back">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="brand-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">AI Hardware</span>
+                    <span class="brand-subtitle">Detection</span>
+                </div>
+            </div>
+            <div class="nav-status" id="nav-status">
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span class="status-text">กำลังตรวจจับ...</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="detection-section">
+            <div class="detection-grid">
+                <!-- Camera Panel -->
+                <div class="camera-panel">
+                    <div class="panel-header">
+                        <i class="fas fa-camera"></i>
+                        <h2>กล้องตรวจจับ</h2>
+                    </div>
+                    <div class="camera-container" id="webcam-container">
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                            <p>กำลังเริ่มกล้อง...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Panel -->
+                <div class="results-panel">
+                    <div class="panel-header">
+                        <i class="fas fa-list"></i>
+                        <h2>ผลการตรวจจับ</h2>
+                    </div>
+
+                    <!-- เพิ่มส่วนแสดงผลหลัก -->
+                    <div class="main-result">
+                        <div class="accuracy-display">
+                            <span id="main-accuracy">0%</span>
+                            <div class="accuracy-ring"></div>
+                        </div>
+                        <div class="result-info">
+                            <div class="detected-label" id="main-label">รอการตรวจจับ...</div>
+                            <div class="confidence-text">ความแม่นยำ</div>
+                        </div>
+                    </div>
+
+                    <!-- รายการผลการตรวจจับทั้งหมด -->
+                    <div id="label-container" class="results-container">
+                        <!-- ผลการตรวจจับจะถูกเพิ่มที่นี่ด้วย JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sample Card -->
+            <div class="sample-card" id="sample-card" style="display: none;">
+                <div class="panel-header">
+                    <i class="fas fa-image"></i>
+                    <h2>ตัวอย่างอุปกรณ์ที่ตรวจพบ</h2>
+                </div>
+                <div class="sample-content">
+                    <img id="sample-image" src="" alt="ตัวอย่างอุปกรณ์">
+                    <h3 id="detected-item" class="sample-title"></h3>
+                    <p id="item-description" class="sample-description"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.20.0/dist/tf.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.4/dist/teachablemachine-image.min.js"></script>
+    <script src="detect.js"></script>
+</body>
+
+</html>
