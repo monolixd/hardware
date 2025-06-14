@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hardware Classifier</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Background Elements -->
+    <div class="bg-elements">
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
+        <div class="floating-elements">
+            <div class="floating-circle circle-1"></div>
+            <div class="floating-circle circle-2"></div>
+            <div class="floating-circle circle-3"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">AI Hardware</span>
+                    <span class="brand-subtitle">Classifier</span>
+                </div>
+            </div>
+            <div class="nav-status" id="nav-status">
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span class="status-text">Ready</span>
+                </div>
+                <div class="status-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>AI Powered</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero-section">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-sparkles"></i>
+                    <span>Powered by TensorFlow.js</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-gradient">ระบบจำแนกอุปกรณ์</span>
+                    <span class="title-highlight">คอมพิวเตอร์</span>
+                </h1>
+                <p class="hero-subtitle">
+                    ใช้ปัญญาประดิษฐ์ขั้นสูงในการจำแนกและระบุอุปกรณ์ฮาร์ดแวร์<br>
+                    อย่างแม่นยำและรวดเร็วผ่านกล้องเว็บแคม
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">14+</div>
+                        <div class="stat-label">ประเภทอุปกรณ์</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">ความแม่นยำ</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">Real-time</div>
+                        <div class="stat-label">การตรวจจับ</div>
+                    </div>
+                </div>
+                <button class="cta-button" id="start-btn" onclick="init()">
+                    <div class="button-background"></div>
+                    <div class="button-content">
+                        <i class="fas fa-camera"></i>
+                        <span>เริ่มการตรวจจับ</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </button>
+            </div>
+            <div class="hero-visual">
+                <div class="visual-container">
+                    <div class="orbit-ring ring-1"></div>
+                    <div class="orbit-ring ring-2"></div>
+                    <div class="orbit-ring ring-3"></div>
+                    <div class="center-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detection Interface -->
+        <section class="detection-interface" id="detection-section" style="display: none;">
+            <div class="interface-header">
+                <h2 class="interface-title">
+                    <i class="fas fa-eye"></i>
+                    <span>AI Vision Dashboard</span>
+                </h2>
+                <div class="interface-controls">
+                    <button class="control-btn" onclick="toggleCamera()">
+                        <i class="fas fa-pause" id="camera-toggle-icon"></i>
+                    </button>
+                    <button class="control-btn" onclick="resetDetection()">
+                        <i class="fas fa-refresh"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="detection-grid">
+                <!-- Camera Feed -->
+                <div class="detection-card camera-card">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <i class="fas fa-video"></i>
+                            <span>กล้องสด</span>
+                        </div>
+                        <div class="live-indicator">
+                            <div class="live-dot"></div>
+                            <span>LIVE</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="camera-container" id="webcam-container">
+                            <div class="camera-loading">
+                                <div class="loading-animation">
+                                    <div class="loading-circle"></div>
+                                    <div class="loading-circle"></div>
+                                    <div class="loading-circle"></div>
+                                </div>
+                                <p>กำลังเปิดกล้อง...</p>
+                            </div>
+                        </div>
+                        <div class="camera-overlay">
+                            <div class="scan-line"></div>
+                            <div class="corner-frame top-left"></div>
+                            <div class="corner-frame top-right"></div>
+                            <div class="corner-frame bottom-left"></div>
+                            <div class="corner-frame bottom-right"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detection Results -->
+                <div class="detection-card results-card">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <i class="fas fa-brain"></i>
+                            <span>ผลการวิเคราะห์</span>
+                        </div>
+                        <div class="confidence-display" id="confidence-badge">
+                            <span class="confidence-value">0</span>
+                            <span class="confidence-unit">%</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="primary-detection" id="top-prediction">
+                            <div class="detection-placeholder">
+                                <i class="fas fa-search"></i>
+                                <span>รอการตรวจจับ...</span>
+                            </div>
+                        </div>
+                        <div class="detection-list" id="label-container">
+                            <!-- Predictions will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Device Information -->
+                <div class="detection-card info-card" id="sample-panel" style="display: none;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <i class="fas fa-info-circle"></i>
+                            <span>ข้อมูลอุปกรณ์</span>
+                        </div>
+                        <div class="device-badge" id="detected-label">-</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="device-showcase">
+                            <div class="device-image-container">
+                                <img id="sample-image" src="" alt="ตัวอย่างอุปกรณ์">
+                                <div class="image-overlay">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                            </div>
+                            <div class="device-details">
+                                <h3 id="sample-name">-</h3>
+                                <p id="sample-description">รายละเอียดอุปกรณ์จะแสดงที่นี่</p>
+                                <div class="device-specs">
+                                    <div class="spec-item">
+                                        <i class="fas fa-tag"></i>
+                                        <span>ประเภท: <span id="device-type">-</span></span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fas fa-cogs"></i>
+                                        <span>หมวดหมู่: <span id="device-category">-</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hardware Info Section -->
+        <section class="hardware-info-section" id="hardware-info-section" style="display: none;">
+            <div class="info-header">
+                <h2>🖥️ ความรู้เกี่ยวกับ Hardware คอมพิวเตอร์</h2>
+                <p class="subtitle">เรียนรู้เกี่ยวกับอุปกรณ์คอมพิวเตอร์พื้นฐาน</p>
+            </div>
+            <div class="search-box">
+                <input type="text" id="search" placeholder="ค้นหาอุปกรณ์...">
+                <button class="search-btn">🔍</button>
+            </div>
+            <div class="info-content" id="info-content">
+                <!-- ข้อมูลฮาร์ดแวร์จะแสดงที่นี่ -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.20.0/dist/tf.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.4/dist/teachablemachine-image.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5a67d8;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a3e;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --glow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Effects */
+        .bg-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 200, 255, 0.2) 0%, transparent 50%);
+        }
+
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            filter: blur(40px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .circle-1 {
+            width: 200px;
+            height: 200px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle-2 {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .circle-3 {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 50%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 15, 35, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: var(--glow);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .brand-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .nav-status {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2s infinite;
+        }
+
+        .status-text {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 25px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            padding-top: 100px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: calc(100vh - 100px);
+            padding: 2rem 0;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .title-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .title-highlight {
+            color: var(--text-primary);
+            display: block;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        .hero-stats {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .stat-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--border);
+        }
+
+        .cta-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            padding: 1.25rem 2.5rem;
+            background: transparent;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: white;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .button-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .button-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-button:hover .button-background {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+            transform: scale(1.05);
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .visual-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .orbit-ring {
+            position: absolute;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            animation: rotate 10s linear infinite;
+        }
+
+        .ring-1 {
+            width: 300px;
+            height: 300px;
+            top: 0;
+            left: 0;
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .ring-2 {
+            width: 200px;
+            height: 200px;
+            top: 50px;
+            left: 50px;
+            border-color: rgba(240, 147, 251, 0.3);
+            animation-direction: reverse;
+            animation-duration: 15s;
+        }
+
+        .ring-3 {
+            width: 100px;
+            height: 100px;
+            top: 100px;
+            left: 100px;
+            border-color: rgba(118, 75, 162, 0.3);
+            animation-duration: 8s;
+        }
+
+        .center-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Detection Interface */
+        .detection-interface {
+            padding: 3rem 0;
+        }
+
+        .interface-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .interface-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .interface-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--glow);
+        }
+
+        .detection-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 2rem;
+        }
+
+        .camera-card {
+            grid-row: 1 / 3;
+        }
+
+        .results-card {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .info-card {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        /* Detection Cards */
+        .detection-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .detection-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        /* Camera Card */
+        .camera-container {
+            position: relative;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .camera-loading {
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .loading-animation {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .loading-circle {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            animation: bounce 1.4s ease-in-out infinite both;
+        }
+
+        .loading-circle:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .loading-circle:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        .camera-container canvas {
+            border-radius: 15px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .camera-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0% {
+                top: 0;
+                opacity: 1;
+            }
+
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+
+        .corner-frame {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+        }
+
+        .corner-frame.top-left {
+            top: 10px;
+            left: 10px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-frame.top-right {
+            top: 10px;
+            right: 10px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-frame.bottom-left {
+            bottom: 10px;
+            left: 10px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-frame.bottom-right {
+            bottom: 10px;
+            right: 10px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 20px;
+            color: #ef4444;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #ef4444;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            50% {
+                opacity: 1;
+            }
+
+            51%,
+            100% {
+                opacity: 0.3;
+            }
+        }
+
+        /* Results Card */
+        .confidence-display {
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 20px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .confidence-value {
+            font-size: 1.25rem;
+        }
+
+        .confidence-unit {
+            font-size: 0.875rem;
+        }
+
+        .primary-detection-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .primary-detection-confidence {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .detection-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .detection-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .detection-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary);
+        }
+
+        .detection-item.highlight {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .detection-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .detection-percentage {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Info Card */
+        .device-badge {
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            color: #10b981;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .device-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .device-image-container {
+            position: relative;
+            text-align: center;
+        }
+
+        #sample-image {
+            width: 100%;
+            max-width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        #sample-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            color: white;
+            font-size: 1.5rem;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .device-image-container:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .device-details h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .device-details p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .device-specs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .spec-item i {
+            color: var(--primary);
+            width: 16px;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .detection-grid {
+                grid-template-columns: 1.5fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .main-container {
+                padding: 0 1rem;
+                padding-top: 100px;
+            }
+
+            .hero-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .detection-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+            }
+
+            .camera-card {
+                grid-row: 1;
+                grid-column: 1;
+            }
+
+            .results-card {
+                grid-row: 2;
+                grid-column: 1;
+            }
+
+            .info-card {
+                grid-row: 3;
+                grid-column: 1;
+            }
+
+            .interface-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .visual-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .ring-1 {
+                width: 250px;
+                height: 250px;
+            }
+
+            .ring-2 {
+                width: 170px;
+                height: 170px;
+                top: 40px;
+                left: 40px;
+            }
+
+            .ring-3 {
+                width: 90px;
+                height: 90px;
+                top: 80px;
+                left: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .stat-divider {
+                width: 100%;
+                height: 1px;
+            }
+
+            .card-content {
+                padding: 1rem;
+            }
+
+            .camera-container {
+                min-height: 300px;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 12px;
+            animation: modalFade 0.3s ease;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .specs {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .specs ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .specs li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .specs li::before {
+            content: "✓";
+            color: #4299e1;
+            position: absolute;
+            left: 0;
+        }
+
+        @keyframes modalFade {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hardware Card Animation */
+        .hardware-card {
+            cursor: pointer;
+        }
+
+        .hardware-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Loading Indicator */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            z-index: 10000;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <script>
+        const URL = "/my_model/";
+        let model, webcam, labelContainer, maxPredictions;
+        let isInitialized = false;
+        let isPaused = false;
+
+        // กำหนดภาพตัวอย่างและข้อมูลอุปกรณ์
+        const deviceData = {
+            "Cables": {
+                image: "images/Cables.jpg",
+                thai: "สายเคเบิล",
+                description: "สายเชื่อมต่อสำหรับอุปกรณ์คอมพิวเตอร์ เช่น สาย USB, HDMI, และสายไฟ",
+                type: "อุปกรณ์เชื่อมต่อ",
+                category: "อุปกรณ์เสริม"
+            },
+            "Case": {
+                image: "images/Case.jpg",
+                thai: "เคสคอมพิวเตอร์",
+                description: "โครงสร้างหลักที่บรรจุส่วนประกอบต่างๆ ของคอมพิวเตอร์",
+                type: "เคสและโครงสร้าง",
+                category: "ฮาร์ดแวร์หลัก"
+            },
+            "Cpu": {
+                image: "images/Cpu.jpg",
+                thai: "หน่วยประมวลผลกลาง",
+                description: "สมองของคอมพิวเตอร์ที่ประมวลผลข้อมูลและคำสั่งต่างๆ",
+                type: "ตัวประมวลผล",
+                category: "ฮาร์ดแวร์หลัก"
+            },
+            "Gpu": {
+                image: "images/Gpu.jpg",
+                thai: "การ์ดจอ",
+                description: "ประมวลผลกราฟิกและการแสดงผลภาพ เหมาะสำหรับเกมและงานกราฟิก",
+                type: "การ์ดกราฟิก",
+                category: "ฮาร์ดแวร์หลัก"
+            },
+            "Hdd": {
+                image: "images/Hdd.jpg",
+                thai: "ฮาร์ดดิสก์",
+                description: "อุปกรณ์จัดเก็บข้อมูลแบบถาวร สำหรับเก็บไฟล์และระบบปฏิบัติการ",
+                type: "อุปกรณ์จัดเก็บ",
+                category: "ฮาร์ดแวร์หลัก"
+            },
+            "Headset": {
+                image: "images/Headset.jpg",
+                thai: "หูฟัง",
+                description: "อุปกรณ์สำหรับฟังเสียงและสื่อสาร มีไมโครโฟนในตัว",
+                type: "อุปกรณ์เสียง",
+                category: "อุปกรณ์เสริม"
+            },
+            "Keyboard": {
+                image: "images/keyboard.jpg",
+                thai: "แป้นพิมพ์",
+                description: "อุปกรณ์ป้อนข้อมูลแบบข้อความและควบคุมคอมพิวเตอร์",
+                type: "อุปกรณ์ป้อนข้อมูล",
+                category: "อุปกรณ์เสริม"
+            },
+            "Microphone": {
+                image: "images/Microphone.jpg",
+                thai: "ไมโครโฟน",
+                description: "อุปกรณ์รับเสียงและบันทึกเสียง สำหรับการสื่อสารและบันทึก",
+                type: "อุปกรณ์เสียง",
+                category: "อุปกรณ์เสริม"
+            },
+            "Monitor": {
+                image: "images/Monitor.jpg",
+                thai: "จอคอมพิวเตอร์",
+                description: "อุปกรณ์แสดงผลข้อมูลและภาพจากคอมพิวเตอร์",
+                type: "อุปกรณ์แสดงผล",
+                category: "ฮาร์ดแวร์หลัก"
+            },
+            "Motherboard": {
+                image: "images/Motherboard.jpg",
+                thai: "เมนบอร์ด",
+                description: "แผงวงจรหลักที่เชื่อมต่อส่วนประกอบต่างๆ ของคอมพิวเตอร์",
+                type: "แผงวงจรหลัก",
+                category: "ฮาร์ดแวร์หลัก"
+            },
+            "Mouse": {
+                image: "images/Mouse.jpg",
+                thai: "เมาส์",
+                description: "อุปกรณ์ชี้ตำแหน่งและควบคุมคอมพิวเตอร์ผ่านการเคลื่อนไหว",
+                type: "อุปกรณ์ป้อนข้อมูล",
+                category: "อุปกรณ์เสริม"
+            },
+            "Ram": {
+                image: "images/Ram.jpg",
+                thai: "หน่วยความจำ",
+                description: "หน่วยความจำชั่วคราวสำหรับการประมวลผลและเก็บข้อมูลระหว่างใช้งาน",
+                type: "หน่วยความจำ",
+                category: "ฮาร์ดแวร์หลัก"
+            },
+            "Speakers": {
+                image: "images/Speakers.jpg",
+                thai: "ลำโพง",
+                description: "อุปกรณ์ออกเสียงและเล่นเสียงจากคอมพิวเตอร์",
+                type: "อุปกรณ์เสียง",
+                category: "อุปกรณ์เสริม"
+            },
+            "Webcam": {
+                image: "images/Webcam.jpg",
+                thai: "เว็บแคม",
+                description: "กล้องสำหรับการสื่อสารและบันทึกวิดีโอผ่านเครือข่าย",
+                type: "อุปกรณ์บันทึกภาพ",
+                category: "อุปกรณ์เสริม"
+            }
+        };
+
+        const hardwareData = [
+            {
+                id: 1,
+                name: "HDD (Hard Disk Drive)",
+                description: "อุปกรณ์จัดเก็บข้อมูลแบบหมุนที่ใช้ในคอมพิวเตอร์ส่วนใหญ่",
+                image: "images/hdd.jpg",
+                category: "storage"
+            },
+            {
+                id: 2,
+                name: "RAM (Random Access Memory)",
+                description: "หน่วยความจำชั่วคราวที่ใช้ในการประมวลผลข้อมูล",
+                image: "images/ram.jpg",
+                category: "memory"
+            },
+            {
+                id: 3,
+                name: "CPU (Central Processing Unit)",
+                description: "หน่วยประมวลผลกลางที่ทำหน้าที่ประมวลผลคำสั่ง",
+                image: "images/cpu.jpg",
+                category: "processor"
+            },
+            {
+                id: 4,
+                name: "GPU (Graphics Processing Unit)",
+                description: "หน่วยประมวลผลกราฟิกที่ใช้ในการเรนเดอร์ภาพ",
+                image: "images/gpu.jpg",
+                category: "graphics"
+            },
+            {
+                id: 5,
+                name: "Motherboard",
+                description: "แผงวงจรหลักที่เชื่อมต่อส่วนประกอบต่างๆ ของคอมพิวเตอร์",
+                image: "images/motherboard.jpg",
+                category: "essential"
+            },
+            {
+                id: 6,
+                name: "SSD (Solid State Drive)",
+                description: "อุปกรณ์จัดเก็บข้อมูลแบบใหม่ ที่มีความเร็วสูงกว่า HDD หลายเท่า",
+                image: "images/ssd.jpg",
+                category: "storage"
+            },
+            {
+                id: 7,
+                name: "Power Supply Unit (PSU)",
+                description: "อุปกรณ์จ่ายไฟให้กับชิ้นส่วนต่างๆ ในคอมพิวเตอร์",
+                image: "images/psu.jpg",
+                category: "essential"
+            },
+            {
+                id: 8,
+                name: "Monitor",
+                description: "จอแสดงผลสำหรับแสดงภาพและข้อมูลต่างๆ",
+                image: "images/monitor.jpg",
+                category: "peripheral"
+            },
+            {
+                id: 9,
+                name: "Keyboard",
+                description: "อุปกรณ์รับข้อมูลหลักสำหรับพิมพ์ข้อความและคำสั่ง",
+                image: "images/keyboard.jpg",
+                category: "peripheral"
+            },
+            {
+                id: 10,
+                name: "Mouse",
+                description: "อุปกรณ์ชี้ตำแหน่งและควบคุมการทำงานบนหน้าจอ",
+                image: "images/mouse.jpg",
+                category: "peripheral"
+            }
+        ];
+
+        // เพิ่มฟังก์ชันสำหรับแสดงรายละเอียดเพิ่มเติม
+        function showDetails(id) {
+            const hardware = hardwareData.find(h => h.id === id);
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="${hardware.image}" alt="${hardware.name}" class="modal-image">
+            <h2>${hardware.name}</h2>
+            <p>${hardware.description}</p>
+            <div class="specs">
+                <h3>คุณสมบัติเด่น:</h3>
+                <ul>
+                    ${getHardwareSpecs(id)}
+                </ul>
+            </div>
+        </div>
+    `;
+            document.body.appendChild(modal);
+
+            const close = modal.querySelector('.close');
+            close.onclick = () => modal.remove();
+            window.onclick = (e) => {
+                if (e.target === modal) modal.remove();
+            }
+        }
+
+        async function init() {
+            if (isInitialized) return;
+
+            try {
+                // อัพเดทสถานะ
+                updateStatus("กำลังโหลดโมเดล AI...", "loading");
+
+                // ซ่อน hero และแสดง detection section
+                document.getElementById('hero-section').style.display = 'none';
+                document.getElementById('detection-section').style.display = 'block';
+
+                // โหลดโมเดล
+                const modelURL = URL + "model.json";
+                const metadataURL = URL + "metadata.json";
+                model = await tmImage.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
+
+                updateStatus("กำลังเปิดกล้อง...", "loading");
+
+                // เปิดกล้อง
+                const flip = true;
+                webcam = new tmImage.Webcam(400, 400, flip);
+                await webcam.setup();
+                await webcam.play();
+
+                // แสดงกล้อง
+                const webcamContainer = document.getElementById("webcam-container");
+                webcamContainer.innerHTML = "";
+                webcamContainer.appendChild(webcam.canvas);
+
+                // เตรียม predictions container
+                labelContainer = document.getElementById("label-container");
+                labelContainer.innerHTML = "";
+
+                for (let i = 0; i < maxPredictions; i++) {
+                    const div = document.createElement("div");
+                    div.className = "detection-item";
+                    div.innerHTML = `
+                        <span class="detection-name">-</span>
+                        <span class="detection-percentage">0%</span>
+                    `;
+                    labelContainer.appendChild(div);
+                }
+
+                updateStatus("ระบบพร้อมใช้งาน", "active");
+                isInitialized = true;
+
+                // เริ่ม loop
+                window.requestAnimationFrame(loop);
+
+            } catch (error) {
+                console.error("เกิดข้อผิดพลาด:", error);
+                updateStatus("เกิดข้อผิดพลาด", "error");
+            }
+        }
+
+        async function loop() {
+            if (!isPaused) {
+                webcam.update();
+                await predict();
+            }
+            window.requestAnimationFrame(loop);
+        }
+
+        let lastDetected = "";
+        let detectionHistory = [];
+
+        async function predict() {
+            const prediction = await model.predict(webcam.canvas);
+
+            // เรียงลำดับตามความมั่นใจ
+            prediction.sort((a, b) => b.probability - a.probability);
+
+            const best = prediction[0];
+            const confidence = Math.round(best.probability * 100);
+
+            // เก็บประวัติการตรวจจับ
+            detectionHistory.push({
+                device: best.className,
+                confidence: confidence,
+                timestamp: Date.now()
+            });
+
+            // เก็บเฉพาะ 10 รายการล่าสุด
+            if (detectionHistory.length > 10) {
+                detectionHistory.shift();
+            }
+
+            // อัพเดท confidence badge
+            const confidenceBadge = document.getElementById('confidence-badge');
+            confidenceBadge.querySelector('.confidence-value').textContent = confidence;
+
+            // เปลี่ยนสีตามความมั่นใจ
+            if (confidence > 80) {
+                confidenceBadge.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            } else if (confidence > 60) {
+                confidenceBadge.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+            } else {
+                confidenceBadge.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+            }
+
+            // อัพเดท top prediction
+            const topPredictionEl = document.getElementById('top-prediction');
+            if (confidence > 50) {
+                topPredictionEl.className = 'primary-detection active';
+                topPredictionEl.innerHTML = `
+                    <div class="primary-detection-name">${deviceData[best.className]?.thai || best.className}</div>
+                    <div class="primary-detection-confidence">${confidence}%</div>
+                `;
+            } else {
+                topPredictionEl.className = 'primary-detection';
+                topPredictionEl.innerHTML = `
+                    <div class="detection-placeholder">
+                        <i class="fas fa-search"></i>
+                        <span>รอการตรวจจับ...</span>
+                    </div>
+                `;
+            }
+
+            // อัพเดท all predictions
+            for (let i = 0; i < Math.min(prediction.length, maxPredictions); i++) {
+                const item = labelContainer.childNodes[i];
+                const percentage = Math.round(prediction[i].probability * 100);
+                const deviceName = deviceData[prediction[i].className]?.thai || prediction[i].className;
+
+                item.querySelector('.detection-name').textContent = deviceName;
+                item.querySelector('.detection-percentage').textContent = percentage + '%';
+
+                // ไฮไลท์รายการที่มีความมั่นใจสูง
+                if (i === 0 && percentage > 70) {
+                    item.classList.add('highlight');
+                } else {
+                    item.classList.remove('highlight');
+                }
+            }
+
+            // แสดงภาพตัวอย่างถ้ามั่นใจมากกว่า 75%
+            if (confidence > 75 && lastDetected !== best.className) {
+                lastDetected = best.className;
+                showDeviceInfo(best.className);
+            }
+        }
+
+        function showDeviceInfo(className) {
+            const device = deviceData[className];
+            if (!device) return;
+
+            const samplePanel = document.getElementById('sample-panel');
+            const img = document.getElementById('sample-image');
+            const name = document.getElementById('sample-name');
+            const description = document.getElementById('sample-description');
+            const label = document.getElementById('detected-label');
+            const deviceType = document.getElementById('device-type');
+            const deviceCategory = document.getElementById('device-category');
+
+            img.src = device.image;
+            img.alt = device.thai;
+            name.textContent = device.thai;
+            description.textContent = device.description;
+            label.textContent = device.thai;
+            deviceType.textContent = device.type;
+            deviceCategory.textContent = device.category;
+
+            samplePanel.style.display = 'block';
+            samplePanel.classList.add('fade-in-up');
+
+            // เล่นเสียงแจ้งเตือน (ถ้าต้องการ)
+            playDetectionSound();
+        }
+
+        function toggleCamera() {
+            isPaused = !isPaused;
+            const icon = document.getElementById('camera-toggle-icon');
+
+            if (isPaused) {
+                icon.className = 'fas fa-play';
+                updateStatus("หยุดชั่วคราว", "paused");
+            } else {
+                icon.className = 'fas fa-pause';
+                updateStatus("ระบบพร้อมใช้งาน", "active");
+            }
+        }
+
+        function resetDetection() {
+            lastDetected = "";
+            detectionHistory = [];
+            document.getElementById('sample-panel').style.display = 'none';
+
+            // รีเซ็ต UI
+            document.getElementById('top-prediction').innerHTML = `
+                <div class="detection-placeholder">
+                    <i class="fas fa-search"></i>
+                    <span>รอการตรวจจับ...</span>
+                </div>
+            `;
+
+            updateStatus("รีเซ็ตเรียบร้อย", "ready");
+            setTimeout(() => {
+                updateStatus("ระบบพร้อมใช้งาน", "active");
+            }, 2000);
+        }
+
+        function updateStatus(message, type) {
+            const statusEl = document.getElementById('nav-status');
+            const statusText = statusEl.querySelector('.status-text');
+            const statusDot = statusEl.querySelector('.status-dot');
+
+            statusText.textContent = message;
+
+            // เปลี่ยนสีตามสถานะ
+            const colors = {
+                'loading': '#f59e0b',
+                'active': '#ef4444',
+                'paused': '#6b7280',
+                'error': '#ef4444',
+                'ready': '#10b981'
+            };
+
+            statusDot.style.background = colors[type] || '#10b981';
+        }
+
+        function playDetectionSound() {
+            // สร้างเสียงแจ้งเตือนง่ายๆ
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            oscillator.frequency.setValueAtTime(1000, audioContext.currentTime + 0.1);
+
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime + 0.01);
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime + 0.2);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.2);
+        }
+
+        // เพิ่มการรองรับ keyboard shortcuts
+        document.addEventListener('keydown', function (event) {
+            switch (event.code) {
+                case 'Space':
+                    event.preventDefault();
+                    if (isInitialized) {
+                        toggleCamera();
+                    } else {
+                        init();
+                    }
+                    break;
+                case 'KeyR':
+                    if (event.ctrlKey) {
+                        event.preventDefault();
+                        resetDetection();
+                    }
+                    break;
+            }
+        });
+
+        // เพิ่ม smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // ฟังก์ชันสำหรับแสดงข้อมูลฮาร์ดแวร์
+        function showHardwareInfo() {
+            const infoContent = document.getElementById('info-content');
+            infoContent.innerHTML = '';
+
+            hardwareData.forEach(hardware => {
+                const div = document.createElement('div');
+                div.className = 'hardware-card';
+                div.innerHTML = `
+                    <img src="${hardware.image}" alt="${hardware.name}">
+                    <div class="hardware-info">
+                        <h3>${hardware.name}</h3>
+                        <p>${hardware.description}</p>
+                        <button class="details-btn" onclick="showDetails(${hardware.id})">ดูรายละเอียด</button>
+                    </div>
+                `;
+                infoContent.appendChild(div);
+            });
+        }
+
+        // เรียกใช้ฟังก์ชันแสดงข้อมูลฮาร์ดแวร์เมื่อโหลดหน้า
+        window.onload = () => {
+            showHardwareInfo();
+        };
+
+        // ค้นหาอุปกรณ์
+        document.getElementById('search').addEventListener('input', function () {
+            const query = this.value.toLowerCase();
+            const allCards = document.querySelectorAll('.hardware-card');
+
+            allCards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
